@@ -517,8 +517,16 @@ namespace start
                         Console.WriteLine();
                         Environment.Exit(0);
                         goto input_server;
+
                     }
-                    input_server:
+                    else if (input == "!exit_menu")
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("going back to menu");
+                        Console.WriteLine();
+                        goto Start;
+                    }
+                input_server:
                     input = Console.ReadLine();
                 }
             }
