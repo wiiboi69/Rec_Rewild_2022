@@ -243,12 +243,16 @@ namespace server
                         {
                             s = File.ReadAllText("SaveData\\avataritems2.txt");
                             s = Avatar_Item_Util.inject_AvatarItem_list(s);
+                            s = Avatar_Item_Util.fix_AvatarItem_list(s);
+
                         }
                         if (Url == "avatar/v4/items")
                         {
                             s = File.ReadAllText("SaveData\\avataritems2.txt");
                             Console.WriteLine("Got avatar items");
                             s = Avatar_Item_Util.inject_AvatarItem_list(s);
+                            s = Avatar_Item_Util.fix_AvatarItem_list(s);
+
                         }
                         if (rawUrl.Contains("quickPlay/v1/getandclear"))
                         {
@@ -447,9 +451,10 @@ namespace server
                             s = BracketResponse;
                         }
                         if (Url == "avatar/v1/defaultbaseavataritems") // 2023, rr dev team stop changing urls!
-                        {                               
-                                s = File.ReadAllText("SaveData\\avataritems2.txt");
-                                Console.WriteLine("Got avatar items");  
+                        {
+                            s = File.ReadAllText("SaveData\\avataritems2.txt");
+                            s = Avatar_Item_Util.fix_AvatarItem_list(s);
+                            Console.WriteLine("Got avatar items");  
                         }
                         //playerevents/v1/room
                         if (Url.StartsWith("images/v4/room"))

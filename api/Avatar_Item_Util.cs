@@ -38,6 +38,28 @@ namespace Rec_rewild.api
             return JsonConvert.SerializeObject(AvatarItemlistdata);
         }
 
+        public static string fix_AvatarItem_list(string s)
+        {
+            List<AvatarItem> AvatarItemlistdata = JsonConvert.DeserializeObject<List<AvatarItem>>(s);
+            List<AvatarItem_v2> AvatarItemlistdatav2 = new List<AvatarItem_v2>();//JsonConvert.DeserializeObject<List<AvatarItem>>(s);
+
+            
+            foreach (AvatarItem AvatarItemdata in AvatarItemlistdata)
+            {
+                AvatarItemlistdatav2.Add(new AvatarItem_v2
+                {
+                    Tooltip = AvatarItemdata.Tooltip,
+                    AvatarItemType = AvatarItemdata.AvatarItemType,
+                    FriendlyName = AvatarItemdata.FriendlyName,
+                    AvatarItemDesc = AvatarItemdata.AvatarItemDesc,
+                    PlatformMask = AvatarItemdata.PlatformMask,
+                    Rarity = AvatarItemdata.Rarity,
+                });
+            }
+
+            return JsonConvert.SerializeObject(AvatarItemlistdatav2);
+        }
+
         public static string inject_gameconfig_list(string s)
         {
             List<gameconfig_item> AvatarItemlistdata = JsonConvert.DeserializeObject<List<gameconfig_item>>(s);
@@ -137,6 +159,24 @@ namespace Rec_rewild.api
             public string Tooltip { get; set; }
             public AvatarItem_star Rarity { get; set; }
         }
+
+        public class AvatarItem_v2
+        {
+            public string AvatarItemDesc { get; set; }
+            public int AvatarItemType { get; set; }
+            public int PlatformMask { get; set; }
+            public string FriendlyName { get; set; }
+            public string Tooltip { get; set; }
+            public AvatarItem_star Rarity { get; set; }
+            public string TagList { get; set; } = null;
+            public bool IsBaseAvatarItem { get; set; } = false;
+            public int AvatarItemId { get; set; } = 0;
+            public DateTime CreatedAt { get; set; } = DateTime.Now;
+            public string ThumbnailImage { get; set; } = string.Empty;
+
+
+        }
+
 
         public enum AvatarItem_star
         {

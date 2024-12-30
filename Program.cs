@@ -452,7 +452,8 @@ namespace start
                 //ConsoleEMU.OpenNewConsole();
 
                 //note: nameserver is at the same port as before
-                new NameServer();
+                Console.WriteLine("the name server for this server is disabled");
+                //new NameServer();
                 new APIServer();
                 new AuthServer();
                 new ImageServer();
