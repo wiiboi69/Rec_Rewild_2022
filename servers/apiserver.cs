@@ -114,6 +114,10 @@ namespace server
                         {
                             s = Config.GetDebugConfig();
                         }
+                        if (Url.StartsWith("config/v1/backtrace"))
+                        {
+                            s = "{\"ReportBudget\":0,\"FilterType\":0,\"SampleRate\":0.025,\"LogLineCount\":50,\"CaptureNativeCrashes\":1,\"ANRThresholdMs\":0,\"MessageCount\":1000,\"MessageRegex\":\"^Cannot set the parent of the GameObject .* while its new parent|^\\\\>\\\\x2010x\\\\:\\\\x20|\\\\'LabelTheme\\\\' contains missing PaletteTheme reference on\",\"VersionRegex\":\".*\"}";
+                        }
                         if (Url == "relationships/v1/bulkignoreplatformusers")
                         {
                             s = BlankResponse;
@@ -256,12 +260,7 @@ namespace server
                         }
                         if (rawUrl.Contains("quickPlay/v1/getandclear"))
                         {
-                            s = JsonConvert.SerializeObject(new QuickPlayResponseDTO()
-                            {
-                                TargetPlayerId = null,
-                                RoomName = null,
-                                ActionCode = null
-                            });
+                            s = "null";
                         }
                         if (Url == "equipment/v1/getUnlocked")
                         {
