@@ -341,6 +341,11 @@ namespace server
                         {
                             s ="{\"Results\":[],\"TotalResults\":0}";
                         }
+                        if (rawUrl.Contains("/econ/customAvatarItems/v1/owned"))
+                        {
+                            s = "{\"Results\":[],\"TotalResults\":0}";
+                        }
+                        //
                         //customAvatarItems/v1/mev
                         /*
                         if (Url == "events/v3/list")
@@ -448,13 +453,17 @@ namespace server
                         }
                         if (Url == "avatar/v1/defaultunlocked") // 2022
                         {
-                            s = BracketResponse;
+                            s = File.ReadAllText("SaveData\\avataritems2.txt");
+                            s = Avatar_Item_Util.fix_AvatarItem_list(s);
+                            Console.WriteLine("Got avatar items");
                         }
                         if (Url == "avatar/v1/defaultbaseavataritems") // 2023, rr dev team stop changing urls!
                         {
+
                             s = File.ReadAllText("SaveData\\avataritems2.txt");
                             s = Avatar_Item_Util.fix_AvatarItem_list(s);
-                            Console.WriteLine("Got avatar items");  
+                            Console.WriteLine("Got avatar items");
+                            s = "[]";
                         }
                         //playerevents/v1/room
                         if (Url.StartsWith("images/v4/room"))

@@ -20,11 +20,11 @@ namespace api
         {
             return JsonConvert.SerializeObject(new Amplitude_2022
             {
-                AmplitudeKey = "93941036bd6a7243bf5c628535f41d63",
+                AmplitudeKey = "NoKeyProvided",
                 UseRudderStack = false,
-                RudderStackKey = "23NiJHIgu3koaGNCZIiuYvIQNCu",
+                RudderStackKey = "NoKeyProvided",
                 UseStatSig = false,
-                StatSigKey = "client-SBZkOrjD3r1Cat3f3W8K6sBd11WKlXZXIlCWj6l4Aje",
+                StatSigKey = "NoKeyProvided",
                 StatSigEnvironment = 0,
             });
         }

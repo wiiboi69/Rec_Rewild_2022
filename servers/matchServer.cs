@@ -51,7 +51,7 @@ namespace server
 				{
 					s = "\"OK\"";
 				}
-				if (rawUrl == "/goto/none")
+				if (rawUrl == "/goto/none" || rawUrl == "/matchmake/none")
 				{
                     gameinprogress = false;
 					s = GameSessions.Createroom();
@@ -60,7 +60,17 @@ namespace server
                         Config.GameSession.roomInstance.isInProgress = gameinprogress;
                     }
                 }
-				else if (rawUrl.StartsWith("/goto/room/"))
+                //
+				else if (rawUrl.StartsWith("/matchmake/dorm"))
+                {
+                    gameinprogress = false;
+                    s = GameSessions.Createroom("Dormroom");
+                    if (Config.GameSession.roomInstance is not null)
+                    {
+                        Config.GameSession.roomInstance.isInProgress = gameinprogress;
+                    }
+                }
+                else if (rawUrl.StartsWith("/goto/room/"))
 				{
                     gameinprogress = false;
                     s = GameSessions.Createroom(rawUrl.Remove(0, 11));	
