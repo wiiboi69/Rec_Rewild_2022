@@ -7,6 +7,38 @@ namespace api
 {
     internal class Settings
     {
+        public static void SetPlayerSettings(string key, string value)
+        {
+            bool Flag1 = false;
+            if (key == "")
+            {
+                return;
+            }
+            Setting setting = new Setting()
+            {
+                Key = key,
+                Value = value
+            };
+            Settings.playerSettings = Settings.LoadSettings();
+            foreach (Setting setting2 in Settings.playerSettings)
+            {
+                if (setting2.Key == setting.Key)
+                {
+                    setting2.Value = setting.Value;
+                    Settings.SaveSettings(Settings.playerSettings);
+                    Flag1 = true;
+                }
+            }
+            if (!Flag1)
+            {
+                Settings.playerSettings.Add(new Setting
+                {
+                    Key = setting.Key,
+                    Value = setting.Value
+                });
+            }
+            Settings.SaveSettings(Settings.playerSettings);
+        }
         public static void SetPlayerSettings(string jsonData)
         {
             bool Flag1 = false;

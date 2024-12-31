@@ -44,11 +44,11 @@ namespace start
             }
             if (!(File.Exists("SaveData\\avataritems.txt")))
             {
-                File.WriteAllText("SaveData\\avataritems.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild/master/Download/avataritems.txt"));
+                File.WriteAllText("SaveData\\avataritems.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_Rewild_2022/master/download/avataritems.json"));
             }
             if (!(File.Exists("SaveData\\avataritems2.txt")))
             {
-                File.WriteAllText("SaveData\\avataritems2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_rewild/master/Download/avataritems2.txt"));
+                File.WriteAllText("SaveData\\avataritems2.txt", new WebClient().DownloadString("https://raw.githubusercontent.com/wiiboi69/Rec_Rewild_2022/master/download/avataritems.json"));
             }
             if (!(File.Exists("SaveData\\equipment.txt")))
             {

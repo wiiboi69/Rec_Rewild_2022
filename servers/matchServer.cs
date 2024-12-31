@@ -102,11 +102,16 @@ namespace server
 				{
 					s = "{\"Success\":true,\"Message\":\"\"}";
 				}
-                if (rawUrl.StartsWith("/player/statusvisibility"))
+
+                if (rawUrl.StartsWith("/player/exclusivelogin"))
 				{
-					s = "{}";
+					s = "";
 				}
-				if (rawUrl.StartsWith("/player/vrmovementmode"))
+                if (rawUrl.StartsWith("/player/statusvisibility"))
+                {
+                    s = "{}";
+                }
+                if (rawUrl.StartsWith("/player/vrmovementmode"))
 				{
 					s = "{}";
 				}
