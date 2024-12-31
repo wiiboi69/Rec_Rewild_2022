@@ -597,7 +597,9 @@ namespace server
                         }
                         if (Url == "PlayerReporting/v1/hile")
                         {
-                            s = "false";
+                            response.StatusCode = (int)HttpStatusCode.NotFound;
+                            s = "";
+                            goto send_data;
                         }
 
                         if (rawUrl == "/player/statusvisibility")

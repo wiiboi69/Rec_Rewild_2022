@@ -523,6 +523,10 @@ namespace start
                     {
                         Console.WriteLine();
                         Console.WriteLine("going back to menu");
+                        Console.Clear();
+                        string exePath = Process.GetCurrentProcess().MainModule.FileName;
+                        Process.Start(exePath); // Start a new instance of the program
+                        Environment.Exit(0);
                         Console.WriteLine();
                         goto Start;
                     }
