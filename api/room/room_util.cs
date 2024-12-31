@@ -383,6 +383,255 @@ namespace api
             return JsonConvert.SerializeObject(rootv2);
         }
 
+
+        public static string room_change_fix_room_2022(string value)
+        {
+            string temp1;
+            //roomdata.RoomRootv2 root = JsonConvert.DeserializeObject(value);
+            RoomRootv2 root = JsonConvert.DeserializeObject<RoomRootv2>(value);
+            root.CreatorAccountId = APIServer.CachedPlayerID;
+            temp1 = JsonConvert.SerializeObject(root);
+            root = JsonConvert.DeserializeObject<RoomRootv2>(temp1);
+            List<SubRoomsv2_2022> subroomsv2data = new List<SubRoomsv2_2022>
+            {
+
+            };
+
+            SubRoomsv2_2022 subroomdata = new SubRoomsv2_2022
+            {
+                Accessibility = 0,
+                DataBlob = "",
+                IsSandbox = true,
+                MaxPlayers = 0,
+                Name = "",
+                SubRoomId = 0,
+                RoomId = 0,
+                UnitySceneId = "",
+                RoomSceneId = 0,
+                RoomSceneLocationId = "",
+                DataModifiedAt = DateTime.UtcNow,
+                DataSavedAt = DateTime.UtcNow,
+                Location = "",
+                SavedByAccountId = -1,
+            };
+
+            int n = 0;
+            do
+            {
+                subroomdata.Accessibility = root.SubRooms[n].Accessibility;
+                //"Accessibility": 1,
+
+                subroomdata.DataBlob = root.SubRooms[n].DataBlob;
+                //"DataBlob": "",
+
+                //"DataBlobName": "",
+
+                //"DataBlobHash": "",
+
+                subroomdata.DataSavedAt = DateTime.UtcNow;
+                //"DataSavedAt": "2024-04-29T00:50:31.3734855",
+
+                subroomdata.IsSandbox = root.SubRooms[n].IsSandbox;
+                //"IsSandbox": true,
+
+                subroomdata.MaxPlayers = root.SubRooms[n].MaxPlayers;
+                //"MaxPlayers": 4,
+
+                subroomdata.Name = root.SubRooms[n].Name;
+                //"Name": "Home",
+
+                subroomdata.RoomSceneId = root.SubRooms[n].RoomId;
+                //"RoomSceneId": 1,
+
+                subroomdata.RoomId = root.SubRooms[n].RoomId;
+                //"RoomId": 1,
+
+                subroomdata.SubRoomId = root.SubRooms[n].SubRoomId;
+                //"SubRoomId": 1,
+
+                subroomdata.DataModifiedAt = DateTime.UtcNow;
+                //"DataModifiedAt" : "2024-04-29T00:50:31.3734855",
+
+                subroomdata.UnitySceneId = root.SubRooms[n].UnitySceneId;
+                //"UnitySceneId": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                subroomdata.RoomSceneLocationId = root.SubRooms[n].UnitySceneId;
+                //"RoomSceneLocationId": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                subroomdata.Location = root.SubRooms[n].UnitySceneId;
+                //"Location": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                subroomdata.CreatedAt = DateTime.Parse(root.CreatedAt);
+
+                subroomdata.SubRoomDataSaveId = subroomdata.SubRoomId;
+
+                subroomsv2data.Add(subroomdata);
+
+                n++;
+            } while (n < root.SubRooms.Count);
+
+            Statsv2 Stats = new Statsv2
+            {
+                CheerCount = root.Stats.CheerCount,
+                FavoriteCount = root.Stats.FavoriteCount,
+                RoomId = root.RoomId,
+                VisitCount = root.Stats.VisitCount,
+                VisitorCount = root.Stats.VisitorCount,
+            };
+
+            RoomRootv4 rootv2 = new RoomRootv4
+            {
+                Accessibility = root.Accessibility,
+                //"Accessibility": 2,
+
+                AllowsJuniors = root.SupportsJuniors,
+                //"AllowsJuniors": true,    
+
+                CustomRoomWarning = root.CustomWarning,
+                //"CustomRoomWarning": "",
+
+                RoomWarningMask = root.WarningMask,
+                //"RoomWarningMask": 0,
+
+                CloningAllowed = root.CloningAllowed,
+                //"CloningAllowed": true,
+
+                CreatedAt = root.CreatedAt,
+                //"CreatedAt": "2024-04-29T00:50:31.3734855",
+
+                CreatorAccountId = APIServer.CachedPlayerID,
+                //"CreatorAccountId": 1,
+
+                CreatorPlayerId = APIServer.CachedPlayerID,
+                //"CreatorPlayerId": 1,
+
+                CustomWarning = root.CustomWarning,
+                //"CustomWarning": "",
+
+                DataBlob = root.DataBlob,
+                //"DataBlob": null,
+
+                Description = root.Description,
+                //"Description": "",
+
+                DisableMicAutoMute = root.DisableMicAutoMute,
+                //"DisableMicAutoMute": false,
+
+                DisableRoomComments = root.DisableRoomComments,
+                //"DisableRoomComments": false,
+
+                EncryptVoiceChat = root.EncryptVoiceChat,
+                //"EncryptVoiceChat": false,
+
+                ImageName = root.ImageName,
+                //"ImageName": "Dorm_Room",
+
+                IsDorm = root.IsDorm,
+                //"IsDorm": true,
+
+                IsRRO = root.IsRRO,
+                //"IsRRO": true,
+
+                LoadScreenLocked = root.LoadScreenLocked,
+                //"LoadScreenLocked": false,
+
+                LoadScreens = root.LoadScreens,
+                //"LoadScreens": [],
+
+                MaxPlayerCalculationMode = 0,
+                //"MaxPlayerCalculationMode": 0,
+
+                MaxPlayers = root.MaxPlayers,
+                //"MaxPlayers": 4,
+
+                MinLevel = root.MinLevel,
+                //"MinLevel": 0,
+
+                Name = root.Name,
+                //"Name": "DormRoom",
+
+                PromoExternalContent = root.PromoExternalContent,
+                //"PromoExternalContent": [],
+
+                PromoImages = root.PromoImages,
+                //"PromoImages": [],
+
+                AutoLocalizeRoom = true,
+                CoOwners =
+                [
+                    APIServer.CachedPlayerID,
+                ],
+                InvitedCoOwners = [],
+                RankingContext = null,
+                IsDeveloperOwned = root.IsDeveloperOwned,
+                Hosts = [],
+                InvitedHosts = [],
+                InvitedModerators = [],
+                Moderators = [],
+                PersistenceVersion = 0,
+                PlayerIdsWithModPower = [],
+                RankedEntityId = null,
+                Roles = root.Roles,
+                //RoomId = root.RoomId,
+                RoomId = root.RoomId,
+                SetType = 0,
+                State = 0,
+                CheerCount = root.Stats.CheerCount,
+                FavoriteCount = root.Stats.FavoriteCount,
+                VisitCount = root.Stats.VisitCount,
+                VisitorCount = root.Stats.VisitorCount,
+                Stats = Stats,
+                SubRooms = subroomsv2data,
+                SupportsJuniors = true,
+                //"SupportsJuniors": true,
+
+                SupportsLevelVoting = true,
+                //"SupportsLevelVoting": true,
+
+                SupportsMobile = true,
+                //"SupportsMobile": true,
+
+                SupportsQuest2 = true,
+                //"SupportsQuest2": true,
+
+                SupportsScreens = true,
+                //"SupportsScreens": true,
+
+                SupportsTeleportVR = true,
+                //"SupportsTeleportVR": true,
+
+                SupportsVRLow = true,
+                //"SupportsVRLow": true,
+
+                SupportsWalkVR = true,
+                //"SupportsWalkVR": true,
+
+                Tags = root.Tags,
+                /*"Tags": [
+                    {
+                        "Tag": "DormRoom",
+                        "Type": 0
+                    }
+                 ],
+                 */
+                ToxmodEnabled = false,
+
+                Type = 0,
+
+                UgcVersion = 0,
+
+                Version = 0,
+                //"Version": 0,
+
+                WarningMask = 0,
+                //"WarningMask": 0
+            };
+
+            rootv2.SubRooms = subroomsv2data;
+
+            return JsonConvert.SerializeObject(rootv2);
+        }
+
         public static string room_change_fix_room_2020(string value)
         {
             string temp1;
@@ -819,6 +1068,267 @@ namespace api
             }
             File.WriteAllText("test.txt", s);
             File.WriteAllText("test2.txt", JsonConvert.SerializeObject(roomlistdatav2));
+            return JsonConvert.SerializeObject(roomlistdatav2);
+        }
+
+        internal static string room_fix_Rooms_list_2022(string s)
+        {
+            Roomlist roomlistdata = JsonConvert.DeserializeObject<Roomlist>(s);
+            roomlistv2_2 roomlistdatav2 = new roomlistv2_2
+            {
+                Results = [],
+                TotalResults = roomlistdata.TotalResults,
+            };
+
+            foreach (Roomdata.RoomRootv2 roomrootdata in roomlistdata.Results)
+            {
+                /*
+                string temp = room_util.room_change_fix_room(JsonConvert.SerializeObject(roomrootdata));
+                roomdata.RoomRootv3 roomrootdatav2 = JsonConvert.DeserializeObject<roomdata.RoomRootv3>(temp);
+                */
+                string temp1;
+                //roomdata.RoomRootv2 root = JsonConvert.DeserializeObject(value);
+                RoomRootv2 root = roomrootdata;
+                root.CreatorAccountId = APIServer.CachedPlayerID;
+                List<SubRoomsv2_2022> subroomsv2data = new List<SubRoomsv2_2022>
+                {
+
+                };
+
+                SubRoomsv2_2022 subroomdata = new SubRoomsv2_2022
+                {
+                    Accessibility = 0,
+                    DataBlob = "",
+                    IsSandbox = true,
+                    MaxPlayers = 0,
+                    Name = "",
+                    SubRoomId = 0,
+                    RoomId = 0,
+                    UnitySceneId = "",
+                    RoomSceneId = 0,
+                    RoomSceneLocationId = "",
+                    DataModifiedAt = DateTime.UtcNow,
+                    DataSavedAt = DateTime.UtcNow,
+                    Location = "",
+                    SavedByAccountId = -1,
+                };
+
+                int n = 0;
+                do
+                {
+                    subroomdata.Accessibility = root.SubRooms[n].Accessibility;
+                    //"Accessibility": 1,
+
+                    subroomdata.DataBlob = root.SubRooms[n].DataBlob;
+                    //"DataBlob": "",
+
+                    //"DataBlobName": "",
+
+                    //"DataBlobHash": "",
+
+                    subroomdata.DataSavedAt = DateTime.UtcNow;
+                    //"DataSavedAt": "2024-04-29T00:50:31.3734855",
+
+                    subroomdata.IsSandbox = root.SubRooms[n].IsSandbox;
+                    //"IsSandbox": true,
+
+                    subroomdata.MaxPlayers = root.SubRooms[n].MaxPlayers;
+                    //"MaxPlayers": 4,
+
+                    subroomdata.Name = root.SubRooms[n].Name;
+                    //"Name": "Home",
+
+                    subroomdata.RoomSceneId = root.SubRooms[n].RoomId;
+                    //"RoomSceneId": 1,
+
+                    subroomdata.RoomId = root.SubRooms[n].RoomId;
+                    //"RoomId": 1,
+
+                    subroomdata.SubRoomId = root.SubRooms[n].SubRoomId;
+                    //"SubRoomId": 1,
+
+                    subroomdata.DataModifiedAt = DateTime.UtcNow;
+                    //"DataModifiedAt" : "2024-04-29T00:50:31.3734855",
+
+                    subroomdata.UnitySceneId = root.SubRooms[n].UnitySceneId;
+                    //"UnitySceneId": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                    subroomdata.RoomSceneLocationId = root.SubRooms[n].UnitySceneId;
+                    //"RoomSceneLocationId": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                    subroomdata.Location = root.SubRooms[n].UnitySceneId;
+                    //"Location": "76d98498-60a1-430c-ab76-b54a29b7a163",
+
+                    subroomdata.CreatedAt = DateTime.Parse(root.CreatedAt);
+
+                    subroomdata.SubRoomDataSaveId = subroomdata.SubRoomId;
+
+                    subroomsv2data.Add(subroomdata);
+
+                    n++;
+                } while (n < root.SubRooms.Count);
+
+                Statsv2 Stats = new Statsv2
+                {
+                    CheerCount = root.Stats.CheerCount,
+                    FavoriteCount = root.Stats.FavoriteCount,
+                    RoomId = root.RoomId,
+                    VisitCount = root.Stats.VisitCount,
+                    VisitorCount = root.Stats.VisitorCount,
+                };
+
+                RoomRootv4 rootv2 = new RoomRootv4
+                {
+                    Accessibility = root.Accessibility,
+                    //"Accessibility": 2,
+
+                    AllowsJuniors = root.SupportsJuniors,
+                    //"AllowsJuniors": true,    
+
+                    CustomRoomWarning = root.CustomWarning,
+                    //"CustomRoomWarning": "",
+
+                    RoomWarningMask = root.WarningMask,
+                    //"RoomWarningMask": 0,
+
+                    CloningAllowed = root.CloningAllowed,
+                    //"CloningAllowed": true,
+
+                    CreatedAt = root.CreatedAt,
+                    //"CreatedAt": "2024-04-29T00:50:31.3734855",
+
+                    CreatorAccountId = APIServer.CachedPlayerID,
+                    //"CreatorAccountId": 1,
+
+                    CreatorPlayerId = APIServer.CachedPlayerID,
+                    //"CreatorPlayerId": 1,
+
+                    CustomWarning = root.CustomWarning,
+                    //"CustomWarning": "",
+
+                    DataBlob = root.DataBlob,
+                    //"DataBlob": null,
+
+                    Description = root.Description,
+                    //"Description": "",
+
+                    DisableMicAutoMute = root.DisableMicAutoMute,
+                    //"DisableMicAutoMute": false,
+
+                    DisableRoomComments = root.DisableRoomComments,
+                    //"DisableRoomComments": false,
+
+                    EncryptVoiceChat = root.EncryptVoiceChat,
+                    //"EncryptVoiceChat": false,
+
+                    ImageName = root.ImageName,
+                    //"ImageName": "Dorm_Room",
+
+                    IsDorm = root.IsDorm,
+                    //"IsDorm": true,
+
+                    IsRRO = root.IsRRO,
+                    //"IsRRO": true,
+
+                    LoadScreenLocked = root.LoadScreenLocked,
+                    //"LoadScreenLocked": false,
+
+                    LoadScreens = root.LoadScreens,
+                    //"LoadScreens": [],
+
+                    MaxPlayerCalculationMode = 0,
+                    //"MaxPlayerCalculationMode": 0,
+
+                    MaxPlayers = root.MaxPlayers,
+                    //"MaxPlayers": 4,
+
+                    MinLevel = root.MinLevel,
+                    //"MinLevel": 0,
+
+                    Name = root.Name,
+                    //"Name": "DormRoom",
+
+                    PromoExternalContent = root.PromoExternalContent,
+                    //"PromoExternalContent": [],
+
+                    PromoImages = root.PromoImages,
+                    //"PromoImages": [],
+
+                    AutoLocalizeRoom = true,
+                    CoOwners =
+                    [
+                        APIServer.CachedPlayerID,
+                ],
+                    InvitedCoOwners = [],
+                    RankingContext = null,
+                    IsDeveloperOwned = root.IsDeveloperOwned,
+                    Hosts = [],
+                    InvitedHosts = [],
+                    InvitedModerators = [],
+                    Moderators = [],
+                    PersistenceVersion = 0,
+                    PlayerIdsWithModPower = [],
+                    RankedEntityId = null,
+                    Roles = root.Roles,
+                    //RoomId = root.RoomId,
+                    RoomId = root.RoomId,
+                    SetType = 0,
+                    State = 0,
+                    CheerCount = root.Stats.CheerCount,
+                    FavoriteCount = root.Stats.FavoriteCount,
+                    VisitCount = root.Stats.VisitCount,
+                    VisitorCount = root.Stats.VisitorCount,
+                    Stats = Stats,
+                    SubRooms = subroomsv2data,
+                    SupportsJuniors = true,
+                    //"SupportsJuniors": true,
+
+                    SupportsLevelVoting = true,
+                    //"SupportsLevelVoting": true,
+
+                    SupportsMobile = true,
+                    //"SupportsMobile": true,
+
+                    SupportsQuest2 = true,
+                    //"SupportsQuest2": true,
+
+                    SupportsScreens = true,
+                    //"SupportsScreens": true,
+
+                    SupportsTeleportVR = true,
+                    //"SupportsTeleportVR": true,
+
+                    SupportsVRLow = true,
+                    //"SupportsVRLow": true,
+
+                    SupportsWalkVR = true,
+                    //"SupportsWalkVR": true,
+
+                    Tags = root.Tags,
+                    /*"Tags": [
+                        {
+                            "Tag": "DormRoom",
+                            "Type": 0
+                        }
+                     ],
+                     */
+                    ToxmodEnabled = false,
+
+                    Type = 0,
+
+                    UgcVersion = 0,
+
+                    Version = 0,
+                    //"Version": 0,
+
+                    WarningMask = 0,
+                    //"WarningMask": 0
+                };
+
+                rootv2.SubRooms = subroomsv2data;
+
+                roomlistdatav2.Results.Add(rootv2);
+            }
             return JsonConvert.SerializeObject(roomlistdatav2);
         }
 
