@@ -606,8 +606,8 @@ namespace server
                         }
                         if (Url == "PlayerReporting/v1/hile")
                         {
-                            response.StatusCode = (int)HttpStatusCode.NotFound;
-                            s = "";
+                            //response.StatusCode = (int)HttpStatusCode.NotFound;
+                            s = "false";
                             goto send_data;
                         }
 
