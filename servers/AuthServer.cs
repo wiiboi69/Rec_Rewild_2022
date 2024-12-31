@@ -77,7 +77,7 @@ namespace server
                         else if (rawUrl == "/eac/challenge")
                         {
 
-                            s = "\"AQAAAHsg7mW5FQEE9HVl9EKMWXrqDzQxUCdgV/IPuQfbRgTx+cGnQqhhAgv1RvpihEC77gQ29JdoGFn2806Q+QPEj7nYg9C8pynbaiSVO8rKLJPvROsHuSXVJpQMv3TD8KyK3Y+n5bb86vAb5kRdZGD//uC8HY+D9jJLlEfTUlU=\"";
+                            s = "\"f3f2e850-b5d4-11ef-ac7e-96584d5248b2\"";
                             Thread.Sleep(100);
                         }
                         else if (rawUrl.StartsWith("/role/developer/"))
