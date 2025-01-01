@@ -94,7 +94,11 @@ namespace server
                                 try
                                 {
                                     s = new WebClient().DownloadString("https://raw.githubusercontent.com/nito9999/Rec_rewild_server_data_2022/main/rooms_name/" + rawUrl.Remove(0, 17).ToLower() + ".txt");
-                                    if (APIServer.CachedversionID > 20210899)
+                                    if (APIServer.CachedversionID > 20220000)
+                                    {
+                                        s = room_util.room_change_fix_room_2022(s);
+                                    }
+                                    else if (APIServer.CachedversionID > 20210899)
                                     {
                                         s = room_util.room_change_fix_room(s);
                                     }
@@ -103,7 +107,11 @@ namespace server
                                 catch
                                 {
                                     s = new WebClient().DownloadString("https://raw.githubusercontent.com/nito9999/Rec_rewild_server_data_2022/main/rooms_name/dormroom.txt");
-                                    if (APIServer.CachedversionID > 20210899)
+                                    if (APIServer.CachedversionID > 20220000)
+                                    {
+                                        s = room_util.room_change_fix_room_2022(s);
+                                    }
+                                    else if (APIServer.CachedversionID > 20210899)
                                     {
                                         s = room_util.room_change_fix_room(s);
                                     }
@@ -130,7 +138,11 @@ namespace server
                             {
                                 s = new WebClient().DownloadString("https://raw.githubusercontent.com/nito9999/Rec_rewild_server_data_2022/main/rooms_name/" + subs[0].ToLower() + ".txt");
                             }
-                            if (APIServer.CachedversionID > 20210899)
+                            if (APIServer.CachedversionID > 20220000)
+                            {
+                                s = room_util.room_change_fix_room_2022(s);
+                            }
+                            else if (APIServer.CachedversionID > 20210899)
                             {
                                 s = room_util.room_change_fix_room(s);
                             }
@@ -139,15 +151,14 @@ namespace server
                         {
                             s = new WebClient().DownloadString("https://raw.githubusercontent.com/nito9999/Rec_rewild_server_data_2022/main/RRORooms.json");
                             s = room_util.room_inject_CustomRooms_list(s);
-                            if (APIServer.CachedversionID > 20210899)
+                            //room_fix_Rooms_list_2022
+                            if (APIServer.CachedversionID > 20220000)
+                            {
+                                s = room_util.room_fix_Rooms_list_2022(s);
+                            }
+                            else if (APIServer.CachedversionID > 20210899)
                             {
                                 s = room_util.room_fix_Rooms_list(s);
-                                //s = new WebClient().DownloadString("https://rooms.rec.net/rooms/hot?take=4");
-                                /*
-                                s = "{\"Results\":[" +
-                                    File.ReadAllText("test4.txt") +
-                                    "],\"TotalResults\":1}";
-                                //https://rooms.rec.net/rooms/hot*/
                             }
 
                         }
@@ -204,7 +215,11 @@ namespace server
 
                             s = room_util.room_change_CreatorAccount(s);
 
-                            if (APIServer.CachedversionID > 20210899)
+                            if (APIServer.CachedversionID > 20220000)
+                            {
+                                s = room_util.room_change_fix_room_2022(s);
+                            }
+                            else if (APIServer.CachedversionID > 20210899)
                             {
                                 s = room_util.room_change_fix_room(s);
                             }
