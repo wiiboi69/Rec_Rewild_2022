@@ -149,7 +149,29 @@ namespace server
                             };
                             s = JsonConvert.SerializeObject(subscription);
                         }
+                        if (Url.StartsWith("images/v6?name="))
+                        {
+                            string temp = Url.Substring("images/v6?name=".Length);
+                            var random = new Random();
+                            var hell = new
+                            {
+                                Id = random.Next(),
+                                Type = 1,
+                                ImageName = temp,
+                                Accessibility = 1,
+                                AccessibilityLocked = false,
+                                Description = "",
+                                TaggedPlayerIds = new List<string>(),
+                                PlayerId = CachedPlayerID,
+                                RoomId = 1,
+                                PlayerEventId = 0,
+                                CreatedAt = DateTime.Now,
+                                CheerCount = 0,
+                                CommentCount = 0,
+                            };
 
+                            s = JsonConvert.SerializeObject(hell);
+                        }
                         if (Url == "config/v1/amplitude")
                         {
                             s = Amplitude_2022.amplitude_2022();
@@ -341,6 +363,10 @@ namespace server
                         {
                             s ="{\"Results\":[],\"TotalResults\":0}";
                         }
+                        if (rawUrl.Contains("customAvatarItems/v2/fromCreator/"))
+                        {
+                            s = "{\"Results\":[],\"TotalResults\":0}";
+                        }
                         if (rawUrl.Contains("/econ/customAvatarItems/v1/owned"))
                         {
                             s = "{\"Results\":[],\"TotalResults\":0}";
@@ -488,6 +514,10 @@ namespace server
                         if (Url == "presence/v1/setplayertype")
                         {
                             s = BracketResponse;
+                        }
+                        if (rawUrl.StartsWith("/subscription/subscriberCount/98431535"))
+                        {
+                            s = "538390";
                         }
                         if (Url == "challenge/v1/getCurrent")
                         {
@@ -639,6 +669,10 @@ namespace server
                         if (rawUrl.Contains("customAvatarItems/v1/isCreationAllowedForAccount"))
                         {
                             s = "{\"success\":true,\"value\":null}";
+                        }
+                        if (rawUrl.Contains("customAvatarItems/v1/isRenderingEnabled"))
+                        {
+                            s = "true";
                         }
                         if (Url.StartsWith("roomcurrencies/v1/currencies"))
                         {
@@ -795,7 +829,7 @@ namespace server
                             }
                             catch
                             {
-                                s = "";
+                                s = "[]";
                             }
                         }
                         if (rawUrl == "/rooms/createdby/me")
@@ -939,6 +973,7 @@ namespace server
                         response.ContentLength64 = (long)bytes.Length;
                         Stream outputStream = response.OutputStream;
                         outputStream.Write(bytes, 0, bytes.Length);
+                        Thread.Sleep(100);
                         outputStream.Flush();
                         
                     }

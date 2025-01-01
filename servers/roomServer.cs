@@ -116,7 +116,7 @@ namespace server
 
                             Url = rawUrl.Remove(0, 12);
                             string[] stringSeparators = new string[] { "?include=1325" };
-                            string[] subs = Url.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries); 
+                            string[] subs = Url.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
                             stringSeparators = new string[] { "&" };
                             subs = Url.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
                             stringSeparators = new string[] { "?include=301" };
@@ -149,6 +149,12 @@ namespace server
                                     "],\"TotalResults\":1}";
                                 //https://rooms.rec.net/rooms/hot*/
                             }
+
+                        }
+                        else if (rawUrl.StartsWith("/featuredrooms/current"))
+                        {
+                            s = new WebClient().DownloadString("https://raw.githubusercontent.com/nito9999/Rec_rewild_server_data_2022/main/RRORooms.json");
+                            
 
                         }
                         else if (rawUrl.StartsWith("/rooms/base"))

@@ -53,18 +53,28 @@ namespace server
 				}
 				if (rawUrl == "/goto/none" || rawUrl == "/matchmake/none")
 				{
-                    gameinprogress = false;
+					gameinprogress = false;
 					s = GameSessions.Createroom();
-                    if (Config.GameSession.roomInstance is not null)
-                    {
-                        Config.GameSession.roomInstance.isInProgress = gameinprogress;
-                    }
-                }
-                //
+					if (Config.GameSession.roomInstance is not null)
+					{
+						Config.GameSession.roomInstance.isInProgress = gameinprogress;
+					}
+				}
+				//
 				else if (rawUrl.StartsWith("/matchmake/dorm"))
+				{
+					gameinprogress = false;
+					s = GameSessions.Createroom("Dormroom");
+					if (Config.GameSession.roomInstance is not null)
+					{
+						Config.GameSession.roomInstance.isInProgress = gameinprogress;
+					}
+				}
+
+                else if (rawUrl.StartsWith("/matchmake/room/"))
                 {
                     gameinprogress = false;
-                    s = GameSessions.Createroom("Dormroom");
+                    s = GameSessions.Createroom2022Nov(rawUrl.Remove(0, 15));
                     if (Config.GameSession.roomInstance is not null)
                     {
                         Config.GameSession.roomInstance.isInProgress = gameinprogress;
