@@ -1,4 +1,4 @@
-# Welcome to 🅱️lue_car!
+# Welcome to 🅱️lue_car! A fork of openrec made by rec room2-126 i dont fucking care
 ---
 🅱️lue_car is a fork of Rec_Rewild for 2022!
 
